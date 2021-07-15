@@ -8,12 +8,12 @@ Client::~Client()
 
 }
 
-int Client::clientRun()
+int Client::clientRun(int testMode, string *test)
 {
 	return 0;
 }
 
-int Client::runOneStatement()
+int Client::pushsOneStatement()
 {
 	return 0;
 }
