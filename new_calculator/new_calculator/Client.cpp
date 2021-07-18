@@ -10,7 +10,7 @@ Client::~Client()
 
 }
 
-int Client::clientRun(int testMode, string *test)
+int Client::clientRun(string *test)
 {
 	string str_crt = "";
 	bool lastExecute = false;
@@ -30,17 +30,22 @@ int Client::clientRun(int testMode, string *test)
 		{
 			string tmp;
 			cout << promptIden;
-			if (!testMode)
-				getline(cin, tmp);
-			else
+#ifdef TEST_MODE
+			if (test)
 			{
-				if(!test->empty())
+				if (!test->empty())
 					tmp = *test;
 				*test = "";
 				if (tmp.empty())
 					return 0;
 			}
-
+			else
+			{
+				getline(cin, tmp);
+			}
+#else
+			getline(cin, tmp);
+#endif
 			str_crt += tmp;
 			lastExecute = false;
 			continue;
@@ -49,7 +54,7 @@ int Client::clientRun(int testMode, string *test)
 		{
 			string str(str_crt.begin(), str_crt.begin() + pos);
 			str_crt.erase(str_crt.begin(), str_crt.begin() + pos + 1);
-			res = pushsOneStatement(str, testMode);
+			res = pushsOneStatement(str);
 			if (res == RES_QUIT) break;
 			lastExecute = true;
 		}
@@ -57,11 +62,11 @@ int Client::clientRun(int testMode, string *test)
 	return 0;
 }
 
-int Client::pushsOneStatement(string statement, int testMode)
+int Client::pushsOneStatement(string statement)
 {
-	if (testMode)
-	{
-		cout << statement << endl;
-	}
+#ifdef TEST_MODE
+	cout << statement << endl;
+#endif
+	es.pushStatements(statement);
 	return 0;
 }

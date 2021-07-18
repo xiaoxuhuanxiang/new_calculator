@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "ExecuteScheduler.h"
 using namespace std;
 
 //Client类主要负责在控制台和用户交互，允许输入多条语句
@@ -21,13 +22,14 @@ class Client
 public:
 	Client();
 	~Client();
-	int clientRun(int testMode = 0, string *test = 0);	//主执行函数，供外部调用
+	int clientRun(string *test = 0);	//主执行函数，供外部调用
 private:
 	enum runRes {
 		RES_OK,
 		RES_ERROR,
 		RES_QUIT
 	};
-	int pushsOneStatement(string statement, int testMode = 0);
+	int pushsOneStatement(string statement);
+	ExecuteScheduler es;
 };
 

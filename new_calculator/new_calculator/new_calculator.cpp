@@ -14,7 +14,7 @@ void testClient_correct()  //Client类切分分号职责测试1
 	cout << endl;
 	cout << "result:" << endl;
 	Client ct;
-	ct.clientRun(1, &test);
+	ct.clientRun(&test);
 
 	cout << endl;
 	cout << "expect:" << endl;
@@ -31,10 +31,10 @@ void testClient_wrong()  //Client类切分分号职责测试2
 	cout << endl;
 	cout << "result:" << endl;
 	Client ct;
-	ct.clientRun(1, &test);
+	ct.clientRun(&test);
 
 	test = "3+2; 1*9-0+5 -3*(1+7);";
-	ct.clientRun(1, &test);  //调用两次模拟换行操作
+	ct.clientRun(&test);  //调用两次模拟换行操作
 
 	cout << endl;
 	cout << "expect:" << endl;
@@ -47,10 +47,17 @@ void testClient_wrong()  //Client类切分分号职责测试2
 	cout << endl;
 }
 
+void test_ExecuteScheduler()
+{
+
+}
+
 int main()
 {
     std::cout << "Hello Calculator!\n";
 	testClient_correct();
 	testClient_wrong();
+
+
 }
 

@@ -104,7 +104,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>TEST_MODE;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -152,10 +152,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp" />
+    <ClCompile Include="cutStatement.cpp" />
+    <ClCompile Include="ExecuteScheduler.cpp" />
+    <ClCompile Include="global.cpp" />
     <ClCompile Include="new_calculator.cpp" />
+    <ClCompile Include="ValuecMemManager.cpp" />
+    <ClCompile Include="value_c.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h" />
+    <ClInclude Include="cutStatement.h" />
+    <ClInclude Include="ExecuteScheduler.h" />
+    <ClInclude Include="global.h" />
+    <ClInclude Include="ValuecMemManager.h" />
+    <ClInclude Include="value_c.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
