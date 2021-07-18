@@ -10,6 +10,7 @@ using namespace std;
 
 void testClient_correct()  //Client类切分分号职责测试1
 {
+	cout << "test client 1" << endl;
 	string test;
 	test = "1+1;2-5+3;";
 
@@ -27,6 +28,7 @@ void testClient_correct()  //Client类切分分号职责测试1
 
 void testClient_wrong()  //Client类切分分号职责测试2
 {
+	cout << "test client 2" << endl;
 	string test;
 	test = "1+1+2; 1+2+5; 1;	2-5*6;";
 
@@ -51,6 +53,7 @@ void testClient_wrong()  //Client类切分分号职责测试2
 
 void test_ExecuteScheduler()  //测试任务调度器
 {
+	cout << "test executeScheduler" << endl;
 	string test;
 
 	cout << endl;
@@ -108,6 +111,8 @@ void test_ExecuteScheduler()  //测试任务调度器
 
 void test_cutStmt_correct()  //测试切词类，此例目前返回结果正确
 {
+	cout << "test cutStatement 1" << endl;
+
 	string test;
 	test = "1+2+4*(7-8)";
 
@@ -117,20 +122,26 @@ void test_cutStmt_correct()  //测试切词类，此例目前返回结果正确
 
 	cout << endl;
 	cout << "expect:" << endl;
-	cout << "1" << " --> " << "+" << " --> " << "2" << " --> " << "+" << "4" << " --> " << "*" << " --> "
+	cout << "1" << " --> " << "+" << " --> " << "2" << " --> " << "+" << " --> " << "4" << " --> " << "*" << " --> "
 		<< "(" << " --> " << "7" << " --> " << "-" << " --> " << "8" << " --> " << ")" << endl;
+	cout << endl;
 }
 
 void test_cutStmt_wrong()  //测试切词类，此例目前返回结果错误
 {
+	cout << "test cutStatement 2" << endl;
 	string test;
-	test = "1-4+5+(1+2)";
+	test = "1-4+512+(1+2)";
+
+	cout << "result:" << endl;
 	cutStatement cs;
 	cs.cutStmt(test);
 
+	cout << endl;
 	cout << "expect:" << endl;
-	cout << "1" << " --> " << "-" << " --> " << "4" << " --> " << "+" << "5" << " --> " << "+" << " --> "
+	cout << "1" << " --> " << "-" << " --> " << "4" << " --> " << "+" << " --> " << "512" << " --> " << "+" << " --> "
 		<< "(" << " --> " << "1" << " --> " << "+" << " --> " << "2" << " --> " << ")" << endl;
+	cout << endl;
 }
 
 int main()
