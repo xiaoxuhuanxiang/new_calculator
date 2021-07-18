@@ -16,9 +16,10 @@ public:
 	ExecuteScheduler();
 	~ExecuteScheduler();
 	void pushStatements(string &statement);
+	int print();
 private:
 	int commandParse(string &statement);
-	int execute(string &param);
+	int execute(string &calcu_statement);
 	void cleanAll();
 	vector<string> m_statements;
 	size_t m_pos;   //¼ÇÂ¼Ö´ÐÐÎ»ÖÃ
