@@ -14,12 +14,13 @@ public:
 	value_c();
 	~value_c();
 	void setStringData(string &data, ElementType roughType);
+	const string& getStringData();
 	value_c *next;
 	value_c *vertical;
 private:
 	string m_data;
-	int m_validNum;
+	//int m_validNum;
 	int m_pos;
-	
+	int m_line;
 };
 
