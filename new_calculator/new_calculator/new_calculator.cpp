@@ -9,7 +9,7 @@ using namespace std;
 void testClient_correct()  //Client类切分分号职责测试1
 {
 	string test;
-	test = "1+1;2-5+3";
+	test = "1+1;2-5+3;";
 
 	cout << endl;
 	cout << "result:" << endl;
@@ -33,11 +33,17 @@ void testClient_wrong()  //Client类切分分号职责测试2
 	Client ct;
 	ct.clientRun(1, &test);
 
+	test = "3+2; 1*9-0+5 -3*(1+7);";
+	ct.clientRun(1, &test);  //调用两次模拟换行操作
+
 	cout << endl;
 	cout << "expect:" << endl;
 	cout << "1+1+2" << endl;
 	cout << " 1+2+5" << endl;
+	cout << " 1" << endl;
 	cout << "	2-5*6" << endl;
+	cout << "3+2" << endl;
+	cout << " 1*9-0+5 -3*(1+7)" << endl;
 	cout << endl;
 }
 

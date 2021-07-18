@@ -15,13 +15,19 @@ const std::string runRel = "run";    //执行语句
 const std::string rundebug = "rund"; //debug执行语句
 const std::string quitIden = "quit"; //退出语句
 const std::string promptIden = ">";  //命令提示符
+const std::string sentenceEnd = ";";  //语句结束符
 class Client
 {
 public:
 	Client();
 	~Client();
-	int clientRun(int testMode=0, string *test=0);	//主执行函数，供外部调用
+	int clientRun(int testMode = 0, string *test = 0);	//主执行函数，供外部调用
 private:
-	int pushsOneStatement();
+	enum runRes {
+		RES_OK,
+		RES_ERROR,
+		RES_QUIT
+	};
+	int pushsOneStatement(string statement, int testMode = 0);
 };
 
