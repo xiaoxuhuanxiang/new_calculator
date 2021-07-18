@@ -20,16 +20,25 @@ int Client::clientRun(string *test)
 		size_t pos = str_crt.find(sentenceEnd);
 		if (!str_crt.empty() && lastExecute)
 		{
+#ifdef TEST_MODE
+			if (pos == str_crt.npos)
+			{
+				if (!test)
+					cout << promptIden << str_crt << endl;
+				else
+					cout << str_crt << endl;
+			}
+#else
 			if (pos == str_crt.npos)
 			{
 				cout << promptIden << str_crt << endl;
 			}
+#endif
 		}
 
 		if (pos == str_crt.npos)
 		{
 			string tmp;
-			cout << promptIden;
 #ifdef TEST_MODE
 			if (test)
 			{
@@ -44,6 +53,7 @@ int Client::clientRun(string *test)
 				getline(cin, tmp);
 			}
 #else
+			cout << promptIden;
 			getline(cin, tmp);
 #endif
 			str_crt += tmp;
