@@ -8,14 +8,19 @@ using namespace std;
 //参数可能包括run，rund，next等。
 //Execute函数中，应调用后续切词模块，元素成分分析模块，语句类型分析模块、执行链生成模块等后续模块
 
+const std::string runCommand = "run";
+
 class ExecuteScheduler
 {
 public:
 	ExecuteScheduler();
 	~ExecuteScheduler();
 	void pushStatements(string &statement);
-	int Execute(string &param);
 private:
+	int commandParse(string &statement);
+	int execute(string &param);
+	void cleanAll();
 	vector<string> m_statements;
+	size_t m_pos;   //记录执行位置
 };
 
