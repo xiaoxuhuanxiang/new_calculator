@@ -12,15 +12,23 @@ enum valueType
 	VAL_STRING
 };
 
-enum operType
+enum ElementType
 {
-	OPER_PLUS,
-	OPER_MINUS,
-	OPER_MUL,
-	OPER_DIV,
-	OPER_LPTH,  //×óÀ¨ºÅ
-	OPER_RPTH,  //×óÀ¨ºÅ
-	OPER_NUM
+	VT_NUMBER = 0,
+	VT_PLUS,
+	VT_MINUS,
+	VT_MUL,
+	VT_DIV,
+	VT_LPTH,
+	VT_RPTH,
+	VT_EQUAL,
+	VT_FUNCNAME,
+	VT_FUNCLPTH,
+	VT_FUNCRPTH,
+	VT_FUNCARGU,
+	VT_FUNCARGDELI,
+	VT_VARNAME,
+	VT_MAX
 };
 
 class global
@@ -29,9 +37,11 @@ public:
 	global();
 	~global();
 	static void Init();
+	static ElementType getOperType(const string &oper_c, int &len);
+	static int getMaxOperByte();
 private:
-	static map<string, operType> operMap;
-	static int operPrior[OPER_NUM];
+	static map<string, ElementType> operMap;
+	static int operPrior[VT_MAX];
 	static bool bInit;
 };
 
