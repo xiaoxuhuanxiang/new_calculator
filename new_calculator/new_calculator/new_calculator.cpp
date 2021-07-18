@@ -5,6 +5,7 @@
 #include <string>
 #include "Client.h"
 #include "ExecuteScheduler.h"
+#include "cutStatement.h"
 using namespace std;
 
 void testClient_correct()  //Client类切分分号职责测试1
@@ -48,7 +49,7 @@ void testClient_wrong()  //Client类切分分号职责测试2
 	cout << endl;
 }
 
-void test_ExecuteScheduler()
+void test_ExecuteScheduler()  //测试任务调度器
 {
 	string test;
 
@@ -105,11 +106,40 @@ void test_ExecuteScheduler()
 	cout << "2-5*6" << endl;
 }
 
+void test_cutStmt_correct()  //测试切词类，此例目前返回结果正确
+{
+	string test;
+	test = "1+2+4*(7-8)";
+
+	cout << "result:" << endl;
+	cutStatement cs;
+	cs.cutStmt(test);
+
+	cout << endl;
+	cout << "expect:" << endl;
+	cout << "1" << " --> " << "+" << " --> " << "2" << " --> " << "+" << "4" << " --> " << "*" << " --> "
+		<< "(" << " --> " << "7" << " --> " << "-" << " --> " << "8" << " --> " << ")" << endl;
+}
+
+void test_cutStmt_wrong()  //测试切词类，此例目前返回结果错误
+{
+	string test;
+	test = "1-4+5+(1+2)";
+	cutStatement cs;
+	cs.cutStmt(test);
+
+	cout << "expect:" << endl;
+	cout << "1" << " --> " << "-" << " --> " << "4" << " --> " << "+" << "5" << " --> " << "+" << " --> "
+		<< "(" << " --> " << "1" << " --> " << "+" << " --> " << "2" << " --> " << ")" << endl;
+}
+
 int main()
 {
     std::cout << "Hello Calculator!\n";
 	testClient_correct();
 	testClient_wrong();
 	test_ExecuteScheduler();
+	test_cutStmt_correct();
+	test_cutStmt_wrong();
 }
 
