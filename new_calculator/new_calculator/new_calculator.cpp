@@ -6,6 +6,7 @@
 #include "Client.h"
 #include "ExecuteScheduler.h"
 #include "cutStatement.h"
+#include "exprTree.h"
 using namespace std;
 
 void testClient_correct()  //Client类切分分号职责测试1
@@ -144,6 +145,22 @@ void test_cutStmt_wrong()  //测试切词类，此例目前返回结果错误
 	cout << endl;
 }
 
+void test_tree()
+{
+	cout << "test tree 1" << endl;
+
+	string test;
+	//test = "1+2+4*(7-8)";
+	//test = "1+2*3";
+	test = "2*(5+6)+1";
+	cout << "result:" << endl;
+	cutStatement cs;
+	value_c *vc = cs.cutStmt(test);
+	exprTree et;
+	et.build(vc);
+
+}
+
 int main()
 {
     std::cout << "Hello Calculator!\n";
@@ -152,5 +169,6 @@ int main()
 	test_ExecuteScheduler();
 	test_cutStmt_correct();
 	test_cutStmt_wrong();
+	test_tree();
 }
 
