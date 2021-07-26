@@ -39,30 +39,62 @@ value_c *cutStatement::cutStmt(string &theStmt)
 			if (it == theStmt.end() - 1)
 			{
 				string crt(itStart, itEnd);
-				*current = ValuecMemManager::p_malloc();
+				*current = new value_c();
 				(*current)->setStringData(crt, VT_NUMBER);
 				current = &((*current)->next);
 			}
 			else if (!isPartOfNumber(*(it + 1), &(*it)))
 			{
 				string crt(itStart, itEnd);
-				*current = ValuecMemManager::p_malloc();
+				*current = new value_c();
 				(*current)->setStringData(crt, VT_NUMBER);
 				current = &((*current)->next);
 			}
 		}
 		else
 		{
-			string crtOper(it, it + global::getMaxOperByte());
+			int operMaxLen = global::getMaxOperByte();
+			int operRealMaxlen = (theStmt.end() - it > operMaxLen) ? operMaxLen : (theStmt.end() - it);
+			string crtOper(it, it + operRealMaxlen);
 			int len;
 			ElementType theType = global::getOperType(crtOper, len);
-			*current = ValuecMemManager::p_malloc();
-			itStart = it + len;
-			itEnd = itStart;
-			string crt(it, it+len);
-			(*current)->setStringData(crt, theType);
-			current = &((*current)->next);
-			it += (len - 1);
+			
+			if (theType != VT_UNKNOWN)
+			{
+				*current = new value_c();
+				itStart = it + len;
+				itEnd = itStart;
+				string crt(it, it + len);
+				(*current)->setStringData(crt, theType);
+				current = &((*current)->next);
+				it += (len - 1);
+			}
+			else
+			{
+				string::iterator ittmp;
+				ittmp = it;
+				//itStart = it;
+				while (theType == VT_UNKNOWN)
+				{
+					++ittmp;
+					if (ittmp == theStmt.end())
+					{
+						string crt(it, ittmp);
+						(*current)->setStringData(crt, VT_UNKNOWN);
+						current = &((*current)->next);
+						break;
+					}
+					operRealMaxlen = (theStmt.end() - ittmp > operMaxLen) ? operMaxLen : (theStmt.end() - ittmp);
+					crtOper.assign(ittmp, ittmp + global::getMaxOperByte());
+					theType = global::getOperType(crtOper, len);
+				}
+
+				string crt(it, ittmp);
+				(*current)->setStringData(crt, VT_UNKNOWN);
+				current = &((*current)->next);
+				itStart = itEnd = ittmp;
+				it = ittmp - 1;
+			}
 		}
 	}
 
