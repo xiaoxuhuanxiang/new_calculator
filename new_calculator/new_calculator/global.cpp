@@ -1,5 +1,6 @@
 #include "global.h"
 map<string, ElementType> global::operMap;
+map<ElementType,int> global::m_operEles;
 int global::operPrior[VT_MAX];
 bool global::bInit = false;
 global::global()
@@ -28,6 +29,11 @@ void global::Init()
 		operPrior[VT_RPTH] = -1;
 		operPrior[VT_EQUAL] = -1;
 		bInit = true;
+
+		m_operEles.insert(make_pair(VT_PLUS, 2));
+		m_operEles.insert(make_pair(VT_MINUS, 2));
+		m_operEles.insert(make_pair(VT_MUL, 2));
+		m_operEles.insert(make_pair(VT_DIV, 2));
 	}
 }
 
@@ -60,5 +66,27 @@ ElementType global::getOperType(const string &oper_c, int &len)
 		}
 	}
 	len = 0;
-	return VT_MAX;  //用于表明找不到
+	return VT_UNKNOWN;  //用于表明找不到
+}
+
+bool global::isOperType(ElementType theType)
+{
+	return m_operEles.find(theType) != m_operEles.end();
+}
+
+int global::getOperPrior_char(const string &oper_c)
+{
+	if (operMap.find(oper_c) == operMap.end()) return -2;
+	return getOperPrior_type(operMap[oper_c]);
+}
+
+int global::getOperPrior_type(ElementType theType)
+{
+	return operPrior[theType];
+}
+
+int global::getNumOfOperandsByOper(ElementType theType)
+{
+	if (m_operEles.find(theType) == m_operEles.end()) return -1;
+	return m_operEles[theType];
 }

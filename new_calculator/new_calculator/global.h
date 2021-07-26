@@ -28,6 +28,7 @@ enum ElementType
 	VT_FUNCARGU,
 	VT_FUNCARGDELI,
 	VT_VARNAME,
+	VT_UNKNOWN,
 	VT_MAX
 };
 
@@ -39,9 +40,14 @@ public:
 	static void Init();
 	static ElementType getOperType(const string &oper_c, int &len);
 	static int getMaxOperByte();
+	static bool isOperType(ElementType theType);
+	static int getOperPrior_char(const string &oper_c);
+	static int getOperPrior_type(ElementType theType);
+	static int getNumOfOperandsByOper(ElementType theType);
 private:
 	static map<string, ElementType> operMap;
 	static int operPrior[VT_MAX];
 	static bool bInit;
+	static map<ElementType, int> m_operEles;
 };
 
