@@ -154,6 +154,8 @@
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="cutStatement.cpp" />
     <ClCompile Include="ExecuteScheduler.cpp" />
+    <ClCompile Include="exprNode.cpp" />
+    <ClCompile Include="exprTree.cpp" />
     <ClCompile Include="global.cpp" />
     <ClCompile Include="new_calculator.cpp" />
     <ClCompile Include="ValuecMemManager.cpp" />
@@ -163,6 +165,8 @@
     <ClInclude Include="Client.h" />
     <ClInclude Include="cutStatement.h" />
     <ClInclude Include="ExecuteScheduler.h" />
+    <ClInclude Include="exprNode.h" />
+    <ClInclude Include="exprTree.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="ValuecMemManager.h" />
     <ClInclude Include="value_c.h" />
