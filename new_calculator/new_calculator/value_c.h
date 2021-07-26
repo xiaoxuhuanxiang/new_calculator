@@ -15,9 +15,13 @@ public:
 	~value_c();
 	void setStringData(string &data, ElementType roughType);
 	const string& getStringData();
+	value_c *addNext(value_c *&current);
+	void freeChains(value_c *head);
+	ElementType getElementType();
 	value_c *next;
 	value_c *vertical;
 private:
+	ElementType m_type;
 	string m_data;
 	//int m_validNum;
 	int m_pos;
